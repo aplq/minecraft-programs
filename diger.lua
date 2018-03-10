@@ -146,12 +146,13 @@ function checkedDrop(force)
 end
 
 local function mineCells(num)
-  for a=1,3*num,1
+  for a=1,2*num,1
     do
     if not tryMove() then
       return false
     end
   end
+  clearBlock(true)
   return true
 end
 
