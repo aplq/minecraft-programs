@@ -145,14 +145,14 @@ function checkedDrop(force)
   end
 end
 
-local function mineCells(num)
-  for a=1,2*num,1
+local function mineCells(side, num)
+  for a=1,3*num,1
     do
     if not tryMove() then
       return false
     end
   end
-  clearBlock(true)
+  r.move(side.backward)
   return true
 end
 
