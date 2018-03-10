@@ -170,7 +170,7 @@ local function digLayer()
   mineCells(1)
   turnLeft()
   size=1
-  repeate
+  repeat
     if not mineCells(size) then
       return false
       end
