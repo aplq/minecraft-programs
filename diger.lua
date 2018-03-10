@@ -174,16 +174,16 @@ local function digLayer()
   repeat
     if not mineCells(size) then
       return false
-      end
+    end
     turn(size)
     if not mineCells(size) then
       return false
-      end
+    end
     size=size+1
     turn(size)
     if not mineCells(1) then
       return false
-      end
+    end
     turn(size)
     until(false)
 end
