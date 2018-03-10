@@ -151,6 +151,7 @@ local function mineCells(num)
     if not tryMove() then
       return false
     end
+  end
   return true
 end
 
