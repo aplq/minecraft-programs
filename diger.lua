@@ -152,7 +152,7 @@ local function mineCells(num)
       return false
     end
   end
-  r.move(side.backward)
+  r.move(sides.back)
   return true
 end
 
