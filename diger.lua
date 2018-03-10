@@ -145,8 +145,8 @@ function checkedDrop(force)
   end
 end
 
-local function mineCells(num)
-  for a=1,4*num,1
+local function mineCells(numberToMine)
+  for a=1,4*numberToMine,1
     do
     if not tryMove() then
       return false
