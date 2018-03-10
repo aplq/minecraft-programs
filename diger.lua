@@ -184,6 +184,7 @@ local function digLayer()
       return false
       end
     turn(size)
+    until(false)
 end
 
 digLayer()
