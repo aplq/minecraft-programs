@@ -146,7 +146,7 @@ function checkedDrop(force)
 end
 
 local function mineCells(numberToMine)
-  for a=1,4*numberToMine,1
+  for a=1,3*numberToMine,1
     do
     if not tryMove() then
       return false
@@ -165,6 +165,7 @@ local function turn(i)
 end
 
 local function digLayer()
+  tryMove()
   mineCells(2)
   turnRight()
   mineCells(1)
