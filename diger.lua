@@ -152,7 +152,7 @@ local function mineCells(numberToMine)
       return false
     end
   end
-  r.swing(sides.front)
+  clearBlock(sides.front, true)
   return true
 end
 
@@ -165,7 +165,6 @@ local function turn(i)
 end
 
 local function digLayer()
-  tryMove()
   mineCells(2)
   turnRight()
   mineCells(1)
