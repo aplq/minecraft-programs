@@ -159,7 +159,7 @@ end
 local function digLayer()
   for b=1,3,1 do
     clearBlock(sides.down, true)
-    trymove(sides.down)
+    tryMove(sides.down)
   end
   mineCells(1)
   turnRight()
