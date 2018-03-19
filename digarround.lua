@@ -75,20 +75,20 @@ end
 local function moveTo(tx, ty, tz, backwards)
   local axes = {
     function()
-      while z > tz do
-        tryMove(sides.up)
-      end
-      while z < tz do
-        tryMove(sides.down)
-      end
-    end,
-    function()
       if y > ty then
         turnTowards(3)
         repeat tryMove() until y == ty
       elseif y < ty then
         turnTowards(1)
         repeat tryMove() until y == ty
+      end
+    end,
+    function()
+      while z > tz do
+        tryMove(sides.up)
+      end
+      while z < tz do
+        tryMove(sides.down)
       end
     end,
     function()
