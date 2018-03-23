@@ -9,6 +9,24 @@ if not component.isAvailable("robot") then
   return
 end
 
+local args, options = shell.parse(...)
+if #args < 2 then
+  io.write("Usage: dig [-s] <starting heirth> <mineing heigth>\n")
+  io.write(" -s: shutdown when done.")
+  return
+end
+
+local sheigth = tonumber(args[1])
+if not sheigth then
+  io.stderr:write("invalid heigth 1")
+  return
+end
+local mheigth = tonumber(args[2])
+if not mheigth then
+  io.stderr:write("invalid heigth 2")
+  return
+end
+
 local r = component.robot
 local x, y, z, f = 0, 0, 0, 0
 local dropping = false -- avoid recursing into drop()
@@ -84,20 +102,20 @@ local function moveTo(tx, ty, tz, backwards)
       end
     end,
     function()
-      while z > tz do
-        tryMove(sides.up)
-      end
-      while z < tz do
-        tryMove(sides.down)
-      end
-    end,
-    function()
       if x > tx then
         turnTowards(2)
         repeat tryMove() until x == tx
       elseif x < tx then
         turnTowards(0)
         repeat tryMove() until x == tx
+      end
+    end,
+    function()
+      while z > tz do
+        tryMove(sides.up)
+      end
+      while z < tz do
+        tryMove(sides.down)
       end
     end
   }
