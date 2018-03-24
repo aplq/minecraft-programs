@@ -10,20 +10,25 @@ if not component.isAvailable("robot") then
 end
 
 local args, options = shell.parse(...)
-if #args < 2 then
-  io.write("Usage: dig [-s] <starting heirth> <mineing heigth>\n")
+if #args < 3 then
+  io.write("Usage: dig [-s] <starting heirth> <mineing heigth> <starting radius>\n")
   io.write(" -s: shutdown when done.")
   return
 end
 
 local sheigth = tonumber(args[1])
 if not sheigth then
-  io.stderr:write("invalid heigth 1")
+  io.stderr:write("invalid starting heigth")
   return
 end
 local mheigth = tonumber(args[2])
 if not mheigth then
-  io.stderr:write("invalid heigth 2")
+  io.stderr:write("invalid mining heigth")
+  return
+end
+local srad = tonumber(args[3])
+if not srad then
+  io.stderr:write("invalid starting radius")
   return
 end
 
@@ -175,16 +180,26 @@ local function mineCells(numberToMine)
 end
 
 local function digLayer()
-  for b=1,3,1 do
-    clearBlock(sides.down, true)
+  for c=(sheight-mheight),0,-1 do
     tryMove(sides.down)
   end
-  mineCells(1)
-  turnRight()
-  mineCells(1)
-  turnRight()
-  size=3
+  if (srad%2)==0 then
+    mineCells(srad/2)
+    turnRight()
+    mineCells(srad/2)
+    turnRight()
+  else
+    turnLeft()
+    mineCells((srad-1)/2)
+    turnLeft()
+    mineCells(srad/2)
+    turnRight()
+    turnRight()
+  end
+  size=srad
   repeat
+    io.write("current radius: "+tostring(size))
+    io.write("Level: "+tostring(mheight))
     if not mineCells(size) then
       return false
     end
@@ -194,7 +209,7 @@ local function digLayer()
     end
     size=size+1
     turnRight()
-    until(false)
+  until(false)
 end
 
 digLayer()
