@@ -3,6 +3,7 @@ local computer = require("computer")
 local robot = require("robot")
 local shell = require("shell")
 local sides = require("sides")
+local gen = component.generator
 
 if not component.isAvailable("robot") then
   io.stderr:write("can only run on robots")
@@ -168,6 +169,14 @@ function checkedDrop(force)
   end
 end
 
+local function genPower():
+  for a=1,16,1
+    do
+    robot.select(a)
+    gen.insert()
+  end
+end
+
 local function mineCells(numberToMine)
   for a=1,3*numberToMine,1
     do
@@ -209,6 +218,7 @@ local function digLayer()
     end
     size=size+1
     turnRight()
+    genPower()
   until(false)
 end
 
