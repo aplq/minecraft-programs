@@ -188,36 +188,52 @@ local function mineCells(numberToMine)
   return true
 end
 
+local function toTurnRight(isRight)
+  if isRight then
+    turnRight()
+  else
+    turnLeft()
+  end
+end
+
 local function digLayer()
   for c=(sheight-mheight),0,-1 do
     tryMove(sides.down)
   end
-  if (srad%2)==0 then
-    mineCells(srad/2)
-    turnRight()
-    mineCells(srad/2)
-    turnRight()
+  if not srad==0 then
+    if (srad%2)==0 then
+      mineCells(srad/2)
+      turnRight()
+      mineCells(srad/2)
+      turnRight()
+    else
+      turnLeft()
+      mineCells((srad-1)/2)
+      turnLeft()
+      mineCells(srad/2)
+      turnRight()
+      turnRight()
+    end
   else
-    turnLeft()
-    mineCells((srad-1)/2)
-    turnLeft()
-    mineCells(srad/2)
+    mineCells(1)
     turnRight()
-    turnRight()
-  end
   size=srad
   repeat
     io.write("current radius: "..tostring(size))
     io.write("Level: "..tostring(mheight))
-    if not mineCells(size) then
+    if not mineCell(size) then
       return false
     end
-    turnRight()
-    if not mineCells(size) then
+    toTurnRight((size%2)==1)
+    if not mineCell(size) then
       return false
     end
+    toTurnRight((size%2)==0)
+    if not mineCell(1) then
+      return false
+    end
+    toTurnRight((size%2)==0)
     size=size+1
-    turnRight()
     genPower()
   until(false)
 end
