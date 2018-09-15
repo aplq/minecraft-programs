@@ -12,19 +12,19 @@ end
 
 local args, options = shell.parse(...)
 if #args < 3 then
-  io.write("Usage: dig [-s] <starting heirth> <mineing heigth> <starting radius>\n")
+  io.write("Usage: dig [-s] <starting heirth> <mineing height> <starting radius>\n")
   io.write(" -s: shutdown when done.")
   return
 end
 
-local sheigth = tonumber(args[1])
-if not sheigth then
-  io.stderr:write("invalid starting heigth")
+local sheight = tonumber(args[1])
+if not sheight then
+  io.stderr:write("invalid starting height")
   return
 end
-local mheigth = tonumber(args[2])
-if not mheigth then
-  io.stderr:write("invalid mining heigth")
+local mheight = tonumber(args[2])
+if not mheight then
+  io.stderr:write("invalid mining height")
   return
 end
 local srad = tonumber(args[3])
@@ -207,8 +207,8 @@ local function digLayer()
   end
   size=srad
   repeat
-    io.write("current radius: "+tostring(size))
-    io.write("Level: "+tostring(mheight))
+    io.write("current radius: "..tostring(size))
+    io.write("Level: "..tostring(mheight))
     if not mineCells(size) then
       return false
     end
